@@ -26,6 +26,27 @@ public class MyFrame extends JFrame implements KeyListener{
            drawing.moveDown();
            System.out.println("pos: " + drawing.x + "," + drawing.y);
        }
+
+       else if(e.getKeyCode() == KeyEvent.VK_SPACE){
+           drawing.jump();
+           System.out.println("Jump");
+       }
+
+       else if(e.getKeyCode() == KeyEvent.VK_A){
+           drawing.attack();
+           System.out.println("Attack");
+       }
+
+       else if(e.getKeyCode() == KeyEvent.VK_S){
+           drawing.cast();
+           System.out.println("Cast Spell??");
+       }
+
+
+       else if(e.getKeyCode() == KeyEvent.VK_X){
+           drawing.slide();
+           System.out.println("Slide");
+       }
 	}
 
 	public void keyReleased(KeyEvent e){
@@ -38,7 +59,7 @@ public class MyFrame extends JFrame implements KeyListener{
 
 	public static void main(String []args){
 		MyFrame gameFrame = new MyFrame();
-		gameFrame.setSize(600,600);
+		gameFrame.setSize(700,400);
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameFrame.setVisible(true);
 		gameFrame.getContentPane().add(drawing);
