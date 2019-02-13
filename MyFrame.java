@@ -29,6 +29,7 @@ public class MyFrame extends JFrame implements KeyListener{
 
        else if(e.getKeyCode() == KeyEvent.VK_S){
 			drawing.spawnEnemy();
+			System.out.println("Enemy Spawned!");
 		}
 
        else if(e.getKeyCode() == KeyEvent.VK_SPACE){
@@ -57,7 +58,7 @@ public class MyFrame extends JFrame implements KeyListener{
 
 	public static void main(String []args){
 		MyFrame gameFrame = new MyFrame();
-		gameFrame.setSize(700,400);
+		gameFrame.setSize(715,445);
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameFrame.setVisible(true);
 		gameFrame.getContentPane().add(drawing);

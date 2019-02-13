@@ -13,6 +13,8 @@ public class Monster{
 	public int width = 0;
 	public int height = 0;
 	public int life = 20;
+	public int exp = 3;
+	public int gold = 5;
 	public boolean idle = true;
 	public boolean alive = true;
 	public boolean contact = false;
@@ -121,7 +123,7 @@ public class Monster{
 							e.printStackTrace();
 						}
 					}
-
+					
 					alive = false;
 					compPass.checkDeath();
 				}

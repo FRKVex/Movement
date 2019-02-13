@@ -22,7 +22,6 @@ public class Draw extends JComponent{
 
 	// animation states
 	public int state = 0;
-	public boolean idle = true;
 
 	// randomizer
 	public Random randomizer;
@@ -30,6 +29,15 @@ public class Draw extends JComponent{
 	// enemy
 	public int enemyCount;
 	Monster[] monsters = new Monster[10];
+
+	//player stats
+	public boolean idle = true;
+	public int life = 100;
+	public int mana = 100;
+	public int lvl = 1;
+	public int atk = 3;
+	public int exp = 0;
+	public int gold = 0;
 
 	public Draw(){
 		randomizer = new Random();
@@ -72,7 +80,7 @@ public class Draw extends JComponent{
 
 	public void spawnEnemy(){
 		if(enemyCount < 10){
-			monsters[enemyCount] = new Monster(randomizer.nextInt(700), randomizer.nextInt(400), this);
+			monsters[enemyCount] = new Monster(randomizer.nextInt(600), randomizer.nextInt(300), this);
 			enemyCount++;
 		}
 	}
@@ -171,7 +179,7 @@ public class Draw extends JComponent{
 					for(int x=0; x<monsters.length; x++){
 						if(monsters[x]!=null){
 							if(monsters[x].contact){
-								monsters[x].life = monsters[x].life - 10;
+								monsters[x].life = monsters[x].life - atk;
 						}
 					}
 				}
@@ -331,6 +339,29 @@ public class Draw extends JComponent{
         super.paintComponent(g);
       	g.drawImage(background, 0, 0, this);
 		g.drawImage(image, x, y, this);
+
+		//HUD
+		//Life
+		g.setColor(Color.RED);
+		g.fillRect(5, 5, 100 * 2, 10);
+
+		g.setColor(Color.GREEN);
+		g.fillRect(5, 5, life * 2, 10);
+
+		//Mana
+		g.setColor(Color.GRAY);
+		g.fillRect(5, 15, mana * 2, 10);
+
+		g.setColor(Color.BLUE);
+		g.fillRect(5, 15, mana * 2, 10);
+
+		//Exp
+		g.setColor(Color.GRAY);
+		g.fillRect(5, 25, 100 * 2, 10);
+
+		g.setColor(Color.YELLOW);
+		g.fillRect(5, 25, exp * 2, 10);
+
 		for(int c = 0; c < monsters.length; c++){		
 			if(monsters[c]!=null){
 				// character grid for monsters
