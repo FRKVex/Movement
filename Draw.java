@@ -12,6 +12,7 @@ public class Draw extends JComponent{
 
 	private BufferedImage image;
 	private BufferedImage background;
+	private BufferedImage charP;
 	public URL resource = getClass().getResource("char/idle0.png");
 
 
@@ -31,13 +32,14 @@ public class Draw extends JComponent{
 	Monster[] monsters = new Monster[10];
 
 	//player stats
-	public boolean idle = true;
 	public int life = 100;
 	public int mana = 100;
 	public int lvl = 1;
 	public int atk = 3;
-	public int exp = 0;
+	public int exp = 1;
 	public int gold = 0;
+	public boolean idle = true;
+	public boolean alive = true;
 
 	public Draw(){
 		randomizer = new Random();
@@ -46,6 +48,7 @@ public class Draw extends JComponent{
 		try{
 			image = ImageIO.read(resource);
 			background = ImageIO.read(getClass().getResource("background.png"));
+			charP = ImageIO.read(getClass().getResource("CharPic.png"));
 		}
 		catch(IOException e){
 			e.printStackTrace();
@@ -337,41 +340,39 @@ public class Draw extends JComponent{
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+
       	g.drawImage(background, 0, 0, this);
 		g.drawImage(image, x, y, this);
-
+		
 		//HUD
+		g.drawImage(charP, 5, 5, this);
 		//Life
 		g.setColor(Color.RED);
-		g.fillRect(5, 5, 100 * 2, 10);
+		g.fillRect(60, 15, 200, 20);
 
 		g.setColor(Color.GREEN);
-		g.fillRect(5, 5, life * 2, 10);
-
-		//Mana
-		g.setColor(Color.GRAY);
-		g.fillRect(5, 15, mana * 2, 10);
-
-		g.setColor(Color.BLUE);
-		g.fillRect(5, 15, mana * 2, 10);
+		g.fillRect(60, 15, life * 2, 20);
 
 		//Exp
 		g.setColor(Color.GRAY);
-		g.fillRect(5, 25, 100 * 2, 10);
+		g.fillRect(60, 40, 100, 10);
 
 		g.setColor(Color.YELLOW);
-		g.fillRect(5, 25, exp * 2, 10);
+		g.fillRect(60, 40, exp * 2, 10);
+
 
 		for(int c = 0; c < monsters.length; c++){		
 			if(monsters[c]!=null){
-				// character grid for monsters
-				// g.setColor(Color.BLUE);
-				// g.fillRect(monsters[c].xPos, monsters[c].yPos+5, monsters[c].width, monsters[c].height);
 				g.drawImage(monsters[c].image, monsters[c].xPos, monsters[c].yPos, this);
 				g.setColor(Color.GREEN);
-				g.fillRect(monsters[c].xPos+7, monsters[c].yPos, monsters[c].life, 2);
+				g.fillRect(monsters[c].xPos+7, monsters[c].yPos, monsters[c].life, 5);
 			}	
 		}
+	}
+
+	//WIP
+	public void reward(){
+		exp = monsters[x].exp + exp;
 	}
 
 	public void checkDeath(){

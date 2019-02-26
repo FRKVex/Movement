@@ -13,8 +13,9 @@ public class Monster{
 	public int width = 0;
 	public int height = 0;
 	public int life = 20;
-	public int exp = 3;
-	public int gold = 5;
+	public int exp = 50;
+	public int gold = 50;
+	public int atk = 50;
 	public boolean idle = true;
 	public boolean alive = true;
 	public boolean contact = false;
@@ -79,6 +80,37 @@ public class Monster{
 
 					if(life<=0){
 						die(compPass);
+					}
+				}
+			}
+		});
+		monThread.start();
+	}
+
+	public void attackThe(Draw compPass){
+		Thread monThread = new Thread(new Runnable(){
+			public void run(){
+				for(int ctr = 0; ctr < 5; ctr++){
+					try {
+					if(ctr==4){
+						resource = getClass().getResource("monster/atak0.png");
+					}
+					else{
+						resource = getClass().getResource("monster/atak"+ctr+".png");
+					}		
+					try{
+						image = ImageIO.read(resource);
+					}
+					catch(IOException e){
+						e.printStackTrace();
+					}
+					    compPass.repaint();
+					    Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					if(contact == true){
+						compPass.life = compPass.life - atk;
 					}
 				}
 			}
